@@ -154,7 +154,7 @@ y su morada.
 Los enemigos en Erethia que Rolando puede vencer son aquellos que tiene un poder de batalla menor al de rolando
 A su vez las moradas que roland podría conquistar son las moradas de los enemigos a los cuales puede vencer.
 
- 
+
 Suponiendo que Rolando tiene 5 de base y capacidad de 3 artefactos. Entre sus artefactos 
 se encuentran la *espada* (que le aporta 5), la *armadura* (aporta 6) y el *collar* (aporta 3).
 Su poder de batalla es 19, por lo tanto puede vencer a archibaldo y a astra. 

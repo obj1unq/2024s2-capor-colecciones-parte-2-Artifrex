@@ -1,56 +1,72 @@
-object espada{
-		
-}
+import artefactos.*
+import hechizos.*
 
-object collar {
+object rolando {
+	const property inventario = #{}
+	const property cosasEncontradas = []
+	var capacidadInventario = 2
+	var hogar = castillo
+	var poderBase = 5
 
-}
+	method artefactoMasPoderosoEnCastillo() {
+		return hogar.cofre().max({artefacto => artefacto.poder(self)})
+	}
 
-object armadura {
+	method poderBase() {
+		return poderBase
+	}
 
-}
+	method pelearBatalla() {
+		self.usarArtefactos()
+		poderBase = poderBase + 1
+	}
 
-object libro {
+	method usarArtefactos() {
+	  inventario.forEach({artefacto => artefacto.serUsado()})
+	}
+
+	method poderPelea() {
+		return poderBase + self.poderDeArtefactos()
+	}
+
+	method poderDeArtefactos() {
+		return inventario.sum{artefacto => artefacto.poder(self)}
+	}	
+
+	method capacidadInventario(_capacidadInventario) {
+		capacidadInventario = _capacidadInventario
+	}
+
+	method encontrar(artefacto) {
+		if (inventario.size() < capacidadInventario) {
+			inventario.add(artefacto)
+		} 
+		cosasEncontradas.add(artefacto)
+	}
+
+	method irACastillo() {
+		hogar.depositar(inventario)
+		inventario.clear()
+	}
+
+	method hogar(_hogar) {
+		hogar = _hogar
+	}
 	
+	method posesionesTotales() {
+		return self.inventario() + castillo.cofre()
+	}
 }
 
 object castillo {
-	
-	const property artefactos = #{}
-		
-	method agregarArtefactos(_artefactos) {
-		artefactos.addAll(_artefactos)		
+	const property cofre = #{}
+
+	method depositar(inventario) {
+		cofre.addAll(inventario)
 	}
-	
+
+
 }
 
 
-object rolando {
-
-	const property artefactos = #{}
-	var property capacidad = 2
-	const casa = castillo
-	const property historia = []
-
-	method encontrar(artefacto) {
-		if(artefactos.size() < capacidad) {
-			artefactos.add(artefacto)
-		}
-		historia.add(artefacto)
-	}
-	
-	method volverACasa() {
-		casa.agregarArtefactos(artefactos)
-		artefactos.clear()
-	}	
-	
-	method posesiones() {
-		return self.artefactos() + casa.artefactos()
-	}
-	
-	method posee(artefacto) {
-		return self.posesiones().contains(artefacto)	
-	}
-		
-}
 

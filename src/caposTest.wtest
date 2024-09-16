@@ -1,0 +1,39 @@
+import capos.*
+import artefactos.*
+
+describe "Rolando el loco encuentra cosas en el piso" {
+
+    test "Rolando y su mochila" {
+        rolando.encontrar(espada)
+        rolando.encontrar(libro)
+        rolando.encontrar(collar)
+        assert.equals(#{espada, libro}, rolando.inventario())
+    }
+
+    test "Rolando guarda cosas en su castillo" {
+        rolando.encontrar(espada)
+        rolando.encontrar(libro)
+        rolando.irACastillo()
+        assert.equals(#{}, rolando.inventario())
+
+        rolando.encontrar(collar)
+        rolando.irACastillo()
+        assert.equals(#{espada, libro, collar}, castillo.cofre())
+    }
+
+    test "Rolando sabe sus posesiones" {
+        rolando.encontrar(armadura)
+        castillo.depositar(#{collar, espada})
+        assert.equals(#{collar,espada, armadura}, rolando.posesionesTotales())
+    }
+
+    test "Rolando y su orden de encuentramiento" {
+        rolando.encontrar(espada)
+        rolando.encontrar(libro)
+        rolando.encontrar(collar)
+        rolando.irACastillo()
+        rolando.encontrar(armadura)
+        rolando.encontrar(collar)
+        assert.equals([espada, libro, collar, armadura, collar], rolando.cosasEncontradas())
+    }
+}
